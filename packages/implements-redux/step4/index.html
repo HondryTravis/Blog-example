@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Redux Test</h1>
+    <script type="module">
+      // TODO: 如果默认没有传递 payloadState（可选的）
+    import { createStore, combineReducers } from './redux/index.js'
+    import count from './reducers/counter.js'
+    import info from './reducers/info.js'
+    // TODO: key 对应要操作的数据的 key 对象
+    const reducer = combineReducers({
+      nums: count,
+      description: info
+    })
+    const store = createStore(reducer)
+
+    store.subscribe( () => {
+      const state = store.getState()
+      console.log('我订阅的 count', state.nums)
+    })
+    store.subscribe( () => {
+      const state = store.getState()
+      console.log('我订阅的 info', state.description)
+    })
+
+    store.dispatch({type: 'ADD'})
+    store.dispatch({type: 'REDUCE'})
+    store.dispatch({type: 'CHANGE'})
+    </script>
+</body>
+</html>

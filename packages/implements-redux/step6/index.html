@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    h1 {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Redux Test</h1>
+  <script type="module">
+    // TODO: 实现 applyMiddleware
+    import exceptiontimeMiddleware from './middlewares/exceptiontimeMiddleware.js';
+    import loggerMiddleware from './middlewares/loggerMiddleware.js';
+    import timeMiddleware from './middlewares/timeMiddleware.js';
+    import { createStore, combineReducers } from './redux/index.js'
+    import count from './reducers/counter.js'
+    import info from './reducers/info.js'
+    const reducer = combineReducers({
+      nums: count,
+      description: info
+    })
+    const store = createStore(reducer)
+    // TODO: 初始化中间件
+    // 记录 dispatch
+    const next = store.dispatch;
+    // 日志
+    const logger = loggerMiddleware(store);
+    // 过期
+    const exception = exceptiontimeMiddleware(store);
+    // 时间
+    const time = timeMiddleware(store);
+
+    store.dispatch = exception(time(logger(next)));
+    store.subscribe(() => {
+      const state = store.getState()
+      console.log('我订阅的 count', state.nums)
+      console.log('我订阅的 info', state.description)
+    })
+    store.dispatch({ type: 'ADD' })
+    // store.dispatch({ type: 'REDUCE' })
+    // store.dispatch({ type: 'CHANGE' })
+  </script>
+</body>
+
+</html>

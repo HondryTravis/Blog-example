@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    h1 {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Redux Test</h1>
+  <script type="module">
+    // TODO: 绑定多个中间件
+    import exceptiontimeMiddleware from './middlewares/exceptiontimeMiddleware.js';
+    import loggerMiddleware from './middlewares/loggerMiddleware.js';
+    import timeMiddleware from './middlewares/timeMiddleware.js';
+    import { createStore, combineReducers, applyMiddleware, bindActionCreators } from './redux/index.js'
+    import count from './reducers/counter.js'
+    import info from './reducers/info.js'
+    import ActionAdd from './actions/counter.js';
+    import ActionInfo from './actions/info.js';
+    const reducer = combineReducers({
+      nums: count,
+      description: info
+    })
+
+    // TODO: 初始化中间件
+    const rewriteMiddleware = applyMiddleware(
+      exceptiontimeMiddleware,
+      timeMiddleware,
+      loggerMiddleware
+    )
+
+    const store = createStore(reducer, {}, rewriteMiddleware)
+    store.subscribe(() => {
+      const state = store.getState()
+      // console.log('我订阅的 count', state.nums)
+      // console.log('我订阅的 info', state.description)
+    })
+    // TODO: 聚合要修改的 action
+    const actions = bindActionCreators(
+        { ActionAdd, ActionInfo },
+        store.dispatch
+      );
+      // actions.ActionAdd();
+      actions.ActionInfo();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Redux Test</h1>
+    <script type="module">
+      // TODO: 实现调度通过 dispatch 派发更新， 实现 reducer，接受一个 action 和 state
+    import { createStore } from './redux/index.js'
+    import { reducer } from './reducer.js'
+
+    const payloadState = {
+        count: 1
+    }
+    const store = createStore(reducer, payloadState)
+
+    store.subscribe( () => {
+      const state = store.getState()
+      console.log('我订阅的', state.count)
+    })
+    store.dispatch({type: 'ADD'})
+    store.dispatch({type: 'REDUCE'})
+    </script>
+</body>
+</html>

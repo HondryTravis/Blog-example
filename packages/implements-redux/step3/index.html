@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Redux Test</h1>
+    <script type="module">
+      // TODO: 实现通过 combineReducers 合并多个 reducer 进行派发更新
+    import { createStore, combineReducers } from './redux/index.js'
+    import counterReducer from './reducers/counter.js'
+    import infoReducer from './reducers/info.js'
+
+    const payloadState = {
+        counter: {
+          count: 1
+        },
+        description: {
+          text: '我是默认数据'
+        }
+    }
+    // TODO: key 对应要操作的数据的 key 对象
+    const reducer = combineReducers({
+      counter: counterReducer,
+      description: infoReducer
+    })
+    const store = createStore(reducer, payloadState)
+
+    store.subscribe( () => {
+      const state = store.getState()
+      console.log('我订阅的 count', state.counter)
+    })
+    store.subscribe( () => {
+      const state = store.getState()
+      console.log('我订阅的 info', state.description)
+    })
+
+    store.dispatch({type: 'ADD'})
+    store.dispatch({type: 'REDUCE'})
+    store.dispatch({type: 'CHANGE'})
+    </script>
+</body>
+</html>
