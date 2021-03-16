@@ -1,0 +1,16 @@
+{
+  "name": "@pkg/demo2",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "dist"
+  ],
+  "scripts": {
+    "test": "node index.js"
+  },
+  "devDependencies": {
+    "@pkg/demo": "1.0.0"
+  }
+}

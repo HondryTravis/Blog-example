@@ -1,5 +1,5 @@
 {
-  "name": "implements-vue-vuex",
+  "name": "@blog/vue-vuex",
   "version": "0.1.0",
   "private": true,
   "scripts": {
