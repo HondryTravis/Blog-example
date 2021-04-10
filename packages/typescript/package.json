@@ -1,0 +1,14 @@
+{
+  "name": "@pkg/ts_learning",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "dist"
+  ],
+  "scripts": {
+    "dev": "rollup -wc",
+    "serve": "serve"
+  }
+}
