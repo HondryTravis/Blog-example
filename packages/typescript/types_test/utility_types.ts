@@ -1,20 +1,20 @@
 
 
 
-interface Props {
-  a?: number;
-  b?: string;
-}
-const obj: Props = { a: 5 };
-// const obj2: Required<Props> = { a: 5 };
+// interface Props {
+//   a?: number;
+//   b?: string;
+// }
+// const obj: Props = { a: 5 };
+// // const obj2: Required<Props> = { a: 5 };
 
 
-interface ITest {
-  id: number;
-}
-const todo: Readonly<ITest> = {
-  id: 6789,
-};
+// interface ITest {
+//   id: number;
+// }
+// const todo: Readonly<ITest> = {
+//   id: 6789,
+// };
 // todo.id = 434
 
 /* Record: Record
